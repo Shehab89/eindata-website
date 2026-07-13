@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <rect width="48" height="48" rx="8" fill="#0F172A"/>
+  <!-- Cloud outline -->
+  <path d="M11 30.5C7.1 30.5 4 27.4 4 23.5c0-3.2 2.2-5.9 5.1-6.7C10.4 11.6 14.3 8 19 8c3.5 0 6.5 1.8 8.3 4.5.7-.3 1.5-.4 2.3-.4 3.6 0 6.5 2.9 6.5 6.5 0 .4 0 .8-.1 1.2C38.4 21 40 23.4 40 26.2c0 2.2-1.1 4.2-2.8 5.3" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M11 30.5v1.2M37.2 31.5v-1" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Left node -->
+  <circle cx="17.5" cy="21.5" r="2.2" fill="#2563EB"/>
+  <line x1="17.5" y1="23.7" x2="17.5" y2="40" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Center node -->
+  <circle cx="24" cy="15" r="2.2" fill="#2563EB"/>
+  <line x1="24" y1="17.2" x2="24" y2="40" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Right node -->
+  <circle cx="30.5" cy="21.5" r="2.2" fill="#2563EB"/>
+  <line x1="30.5" y1="23.7" x2="30.5" y2="40" stroke="#2563EB" stroke-width="2.4" stroke-linecap="round"/>
+</svg>
