@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useInView } from '@/hooks/useAnimations';
@@ -33,21 +33,13 @@ function FAQItem({
           }`}
         />
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 pt-2 text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] leading-relaxed bg-[var(--color-surface-card)] dark:bg-[var(--color-dark-surface-card)]">
-              {answer}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Answers stay in the HTML (just hidden) so search engines and AI crawlers can read them. */}
+      <div
+        hidden={!isOpen}
+        className="px-5 pb-5 pt-2 text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] leading-relaxed bg-[var(--color-surface-card)] dark:bg-[var(--color-dark-surface-card)]"
+      >
+        {answer}
+      </div>
     </div>
   );
 }
@@ -59,8 +51,9 @@ export default function FAQ() {
 
   return (
     <section
+      id="faq"
       ref={ref}
-      className="py-24 lg:py-32 bg-[var(--color-surface)] dark:bg-[var(--color-dark-surface)]"
+      className="py-20 lg:py-28 bg-[var(--color-surface)] dark:bg-[var(--color-dark-surface)]"
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -70,15 +63,9 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 text-sm font-semibold text-[var(--color-accent)] bg-[var(--color-accent)]/10 rounded-full mb-4">
-            FAQ
-          </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text)] dark:text-[var(--color-dark-text)] font-[var(--font-heading)]">
             {t.faq.title}
           </h2>
-          <p className="mt-4 text-lg text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)]">
-            {t.faq.subtitle}
-          </p>
         </motion.div>
 
         {/* FAQ Items */}

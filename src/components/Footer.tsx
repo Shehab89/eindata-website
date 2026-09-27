@@ -4,111 +4,56 @@ import React from 'react';
 import { LinkedinIcon as Linkedin } from '@/components/icons/LinkedinIcon';
 import { EinDataLogo } from '@/components/icons/EinDataLogo';
 import { useLanguage } from '@/context/LanguageContext';
+import { localePath, site } from '@/lib/i18n';
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const links = [
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.faq, href: '#faq' },
+    { label: t.nav.contact, href: '#contact' },
+  ];
 
   return (
-    <footer className="bg-[var(--color-text)] dark:bg-[var(--color-dark-surface-card)] border-t border-[var(--color-border)] dark:border-[var(--color-dark-border)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="mb-4">
-              <EinDataLogo variant="white" size="md" showTagline />
-            </div>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              {t.footer.description}
-            </p>
+    <footer className="bg-[var(--color-text)] dark:bg-[var(--color-dark-surface-card)]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+          <div className="max-w-sm">
+            <EinDataLogo variant="white" size="md" showTagline />
+            <p className="mt-4 text-sm text-gray-400 leading-relaxed">{t.footer.description}</p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              {t.footer.quickLinks}
-            </h3>
-            <ul className="space-y-3">
-              {[
-                { label: t.nav.home, href: '#home' },
-                { label: t.nav.services, href: '#services' },
-                { label: t.nav.about, href: '#about' },
-                { label: t.nav.projects, href: '#projects' },
-                { label: t.nav.contact, href: '#contact' },
-              ].map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              {t.footer.legal}
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t.footer.privacy}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {t.footer.terms}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Connect */}
-          <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              {t.footer.connect}
-            </h3>
-            <div className="flex gap-3">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-lg bg-white/10 hover:bg-[var(--color-accent)] flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
+          <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-3">
+            {links.map((link) => (
+              <a key={link.href} href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
+                {link.label}
               </a>
-            </div>
-            <div className="mt-6">
-              <a
-                href="mailto:info@eindata.nl"
-                className="text-sm text-gray-400 hover:text-white transition-colors"
-              >
-                info@eindata.nl
-              </a>
-            </div>
+            ))}
+          </nav>
+
+          <div className="space-y-3">
+            <a href={`mailto:${site.email}`} className="block text-sm text-gray-400 hover:text-white transition-colors">
+              {site.email}
+            </a>
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              <Linkedin className="w-4 h-4" /> LinkedIn
+            </a>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-gray-500">
-              {t.footer.copyright}
-            </p>
-            <p className="text-sm text-gray-500">
-              KVK: 12345678 | BTW: NL123456789B01
-            </p>
-          </div>
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-500">
+          <p>
+            © {new Date().getFullYear()} {site.name} · {site.city} · KVK {site.kvk}
+          </p>
+          <a href={`${localePath[locale]}privacy/`} className="hover:text-white transition-colors">
+            {t.footer.privacy}
+          </a>
         </div>
       </div>
     </footer>
