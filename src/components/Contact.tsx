@@ -18,7 +18,8 @@ const cardClass =
   'bg-[var(--color-surface-card)] dark:bg-[var(--color-dark-surface-card)] rounded-2xl p-6 border border-[var(--color-border)] dark:border-[var(--color-dark-border)]';
 
 // Public Web3Forms access key (safe to expose; it only allows sending to your own inbox).
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+const WEB3FORMS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '2dec4101-ad4c-43e0-b0af-eb94e61d0acc';
 
 const emptyForm ={ name: '', email: '', company: '', message: '', website: '' };
 
