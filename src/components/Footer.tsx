@@ -4,7 +4,7 @@ import React from 'react';
 import { LinkedinIcon as Linkedin } from '@/components/icons/LinkedinIcon';
 import { EinDataLogo } from '@/components/icons/EinDataLogo';
 import { useLanguage } from '@/context/LanguageContext';
-import { site } from '@/lib/i18n';
+import { localePath, site } from '@/lib/i18n';
 
 export default function Footer() {
   const { t, locale } = useLanguage();
@@ -51,7 +51,7 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {site.name} · {site.city} · KVK {site.kvk}
           </p>
-          <a href={locale === 'nl' ? '/nl/privacy' : '/privacy'} className="hover:text-white transition-colors">
+          <a href={`${localePath[locale]}privacy/`} className="hover:text-white transition-colors">
             {t.footer.privacy}
           </a>
         </div>

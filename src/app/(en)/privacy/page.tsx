@@ -3,7 +3,7 @@ import { buildMetadata } from '@/lib/seo';
 import { translations } from '@/lib/i18n';
 
 export const metadata = {
-  ...buildMetadata('en', '/privacy'),
+  ...buildMetadata('en', 'privacy/'),
   title: `${translations.en.privacy.title} | EinData`,
 };
 

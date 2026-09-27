@@ -1,62 +1,61 @@
-# Going live on eindata.nl
+# Going live on eindata.nl (GoDaddy cPanel hosting)
 
-The domain `eindata.nl` is registered at GoDaddy. The steps below put the site online,
-make `info@eindata.nl` work and get the site into Google. Everything here is free.
+The site is built as plain HTML files (`npm run build` writes them to the `out/` folder).
+GoDaddy's cPanel hosting serves these files. The contact form uses `contact.php`,
+which sends email through the hosting's built-in mail, so no extra services are needed.
 
-## 1. Host the website on Vercel (free)
+## 1. Create the mailbox info@eindata.nl (cPanel)
 
-1. Sign in at https://vercel.com with your GitHub account.
-2. **Add New → Project**, import `Shehab89/eindata-website` and click **Deploy**.
-   Vercel detects Next.js automatically. After that, every push to `master` deploys automatically.
-3. In the project, open **Settings → Domains** and add `eindata.nl` and `www.eindata.nl`.
-   Vercel shows the DNS records to create. They are usually:
+1. GoDaddy → **My Products → Web Hosting → Manage → cPanel Admin**.
+2. **Email Accounts → + Create**, username `info`, domain `eindata.nl`, choose a password.
+3. Read the mail in **Webmail**, or forward it to Gmail:
+   **Forwarders → Add Forwarder** → `info@eindata.nl` → `shihab.masri@gmail.com`.
+4. Optional: **Email Accounts → info → Connect Devices** shows the IMAP/SMTP settings
+   to add the mailbox to Gmail, Outlook or your phone.
+5. In cPanel, open **Email Deliverability** and click **Repair** on any records it flags (SPF/DKIM).
+   This keeps the form emails out of spam.
 
-   | Type  | Name | Value                  |
-   |-------|------|------------------------|
-   | A     | @    | 76.76.21.21            |
-   | CNAME | www  | cname.vercel-dns.com   |
+The contact form sends messages from `website@eindata.nl` to `info@eindata.nl`.
+Pressing **Reply** answers the visitor directly. To use different addresses,
+edit `$to` / `$from` at the top of `public/contact.php`.
 
-4. In GoDaddy, open **My Products → eindata.nl → DNS**. Delete the existing `@` A record
-   (GoDaddy's parking page) and add the records above. The change usually works within an hour.
+## 2. Automatic deploy from GitHub (recommended)
 
-## 2. Receive email on info@eindata.nl (free forwarding to Gmail)
+Every push to `master` then builds the site and uploads it to GoDaddy.
 
-Use ImprovMX (https://improvmx.com, free plan):
+1. In cPanel, open **FTP Accounts** and create an account (or use the main cPanel account).
+   Note the **FTP server** name shown under "Configure FTP Client" (usually `ftp.eindata.nl`).
+2. In GitHub, go to **Shehab89/eindata-website → Settings → Secrets and variables → Actions →
+   New repository secret** and add:
+   - `FTP_SERVER`: e.g. `ftp.eindata.nl`
+   - `FTP_USERNAME`: the FTP username
+   - `FTP_PASSWORD`: the FTP password
+   - `FTP_DIR` (optional): only if the FTP account does not start one level above
+     `public_html`. For an FTP account whose home *is* `public_html`, set `./`.
+3. Merge the changes into `master` (or open **Actions → Deploy to eindata.nl → Run workflow**).
+   The **Actions** tab shows progress; after about 2 minutes the new site is live.
 
-1. Sign up, add the domain `eindata.nl` and set the alias `info` → `shihab.masri@gmail.com`.
-2. In GoDaddy DNS, add:
+If the upload fails with a TLS error, change `protocol: ftps` to `protocol: ftp` in
+`.github/workflows/deploy.yml`.
 
-   | Type | Name | Value                                     | Priority |
-   |------|------|-------------------------------------------|----------|
-   | MX   | @    | mx1.improvmx.com                          | 10       |
-   | MX   | @    | mx2.improvmx.com                          | 20       |
-   | TXT  | @    | `v=spf1 include:spf.improvmx.com ~all`    |          |
+## 3. Manual upload (alternative)
 
-3. (Optional) To also *send* as info@eindata.nl from Gmail, go to Gmail → Settings →
-   Accounts → "Send mail as" → add `info@eindata.nl` with ImprovMX's SMTP details.
+1. On your computer: `npm install` then `npm run build`.
+2. Zip the **contents** of the `out/` folder, not the folder itself.
+3. In cPanel, open **File Manager → public_html**. Delete or back up the old site files,
+   **Upload** the zip, then right-click → **Extract**.
+4. Make sure hidden files are uploaded too (`.htaccess`). In File Manager:
+   **Settings → Show Hidden Files**.
 
-If you want a real mailbox instead, Google Workspace or Microsoft 365 (about €6/month) provides one.
-Follow their DNS instructions instead of adding the ImprovMX records.
+## 4. SSL
 
-## 3. Make the contact form send email (Resend, free up to 3,000 emails/month)
+In cPanel, open **SSL/TLS Status** and run **AutoSSL** if eindata.nl is not yet covered.
+`.htaccess` redirects everything to `https://eindata.nl`.
 
-1. Sign up at https://resend.com and create an API key.
-2. Go to **Domains → Add domain**, enter `eindata.nl` and add the DNS records Resend shows in GoDaddy.
-   They sit on subdomains (for example `send.eindata.nl` and `resend._domainkey`), so they
-   don't conflict with the ImprovMX records.
-3. In Vercel, open **Settings → Environment Variables** and add:
-   - `RESEND_API_KEY` = your key
-   - `CONTACT_TO_EMAIL` = `info@eindata.nl` (or your Gmail address)
-   - `CONTACT_FROM_EMAIL` = `EinData website <website@eindata.nl>`
-4. Redeploy (Deployments → ⋯ → Redeploy) and send yourself a test message.
-
-Until the key is set, the form shows visitors a message asking them to email info@eindata.nl directly.
-When a form message arrives, pressing **Reply** answers the visitor directly.
-
-## 4. Get found on Google and in AI assistants
+## 5. Get found on Google and in AI assistants
 
 1. **Google Search Console** (https://search.google.com/search-console): add the domain
-   `eindata.nl` (verify it with a TXT record in GoDaddy), then submit `https://eindata.nl/sitemap.xml`.
+   `eindata.nl` (verify it with a TXT record in GoDaddy DNS), then submit `https://eindata.nl/sitemap.xml`.
 2. **Bing Webmaster Tools** (https://www.bing.com/webmasters): import your site from Search Console.
    ChatGPT search and Copilot use Bing's index, so this matters for AI chatbots.
 3. **Google Business Profile** (https://business.google.com): create a profile for EinData
@@ -68,7 +67,7 @@ When a form message arrives, pressing **Reply** answers the visitor directly.
 
 The site already includes:
 
-- English and Dutch pages with hreflang and canonical URLs
+- English (`/`) and Dutch (`/nl/`) pages with hreflang and canonical URLs
 - Open Graph tags
 - JSON-LD (ProfessionalService, Person, FAQPage)
 - `sitemap.xml`

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { type Locale, localePath, site, translations } from '@/lib/i18n';
+import { type Locale, pageUrl, site, translations } from '@/lib/i18n';
 
 const keywords: Record<Locale, string[]> = {
   en: [
@@ -32,7 +32,7 @@ const keywords: Record<Locale, string[]> = {
 
 export function buildMetadata(locale: Locale, path = ''): Metadata {
   const t = translations[locale];
-  const url = `${site.url}${localePath[locale] === '/' ? '' : localePath[locale]}${path}`;
+  const url = pageUrl(locale, path);
 
   return {
     metadataBase: new URL(site.url),
@@ -44,9 +44,9 @@ export function buildMetadata(locale: Locale, path = ''): Metadata {
     alternates: {
       canonical: url,
       languages: {
-        en: `${site.url}${path}`,
-        nl: `${site.url}/nl${path}`,
-        'x-default': `${site.url}${path}`,
+        en: pageUrl('en', path),
+        nl: pageUrl('nl', path),
+        'x-default': pageUrl('en', path),
       },
     },
     openGraph: {
@@ -91,7 +91,6 @@ export function buildMetadata(locale: Locale, path = ''): Metadata {
 // the person behind it and the answers to common questions.
 export function buildJsonLd(locale: Locale) {
   const t = translations[locale];
-  const pageUrl = locale === 'en' ? site.url : `${site.url}/nl`;
 
   return {
     '@context': 'https://schema.org',
@@ -166,7 +165,7 @@ export function buildJsonLd(locale: Locale) {
       },
       {
         '@type': 'FAQPage',
-        '@id': `${pageUrl}#faq`,
+        '@id': `${pageUrl(locale)}#faq`,
         inLanguage: locale,
         mainEntity: t.faq.items.map((item) => ({
           '@type': 'Question',

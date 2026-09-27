@@ -14,7 +14,12 @@ export const site = {
   kvk: '42115043',
 };
 
-export const localePath: Record<Locale, string> = { en: '/', nl: '/nl' };
+export const localePath: Record<Locale, string> = { en: '/', nl: '/nl/' };
+
+// Absolute URL of a page, e.g. pageUrl('nl', 'privacy/') -> https://eindata.nl/nl/privacy/
+export function pageUrl(locale: Locale, path = '') {
+  return `${site.url}${localePath[locale]}${path}`;
+}
 
 export interface Translations {
   meta: {
