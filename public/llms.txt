@@ -1,0 +1,25 @@
+# EinData
+
+> EinData is the freelance data consultancy of Shehab Al-Masri, based in Eindhoven, the Netherlands (KVK 42115043). It offers Azure data engineering, Power BI and Tableau dashboards, reporting automation, data analysis and AI/NLP automation for businesses in the Netherlands. Work is done in English; Dutch at B1 level.
+
+## Key facts
+
+- Business: EinData, sole proprietorship (eenmanszaak), Eindhoven (Brainport region), Netherlands
+- Founder: Shehab Al-Masri, MSc Applied Data Science (Utrecht University, 2024); Postgraduate Diploma in Big Data & Data Science (Nile University, 2022); BSc Electrical Engineering (Sana'a University, 2012)
+- Experience: data analyst / data manager since 2020 for RNW Media, Internews, ACLED, MochaValley and RECO-Yemen
+- Tools: Microsoft Azure (Data Factory, SQL Database, Synapse Analytics, Machine Learning), Python (pandas, scikit-learn, PySpark), SQL, R, Power BI, Tableau, Excel, n8n
+- Ways to work: freelance/interim (remote, on-site or hybrid anywhere in the Netherlands, directly or via agencies), fixed-scope projects, hours bundles for small businesses
+- Contact: info@eindata.nl · https://www.linkedin.com/in/shihab-masri
+
+## Services
+
+- Azure data engineering: ETL/ELT pipelines with Azure Data Factory, Azure SQL and Synapse, moving spreadsheet data to the cloud
+- Dashboards & reporting: Power BI and Tableau dashboards, KPI definition, automated recurring reports
+- Data analysis: data cleaning and quality checks, survey and statistical analysis, trend analysis
+- AI & automation: NLP and text mining, machine learning, LLM workflows, workflow automation with Python and n8n
+
+## Pages
+
+- [Home (English)](https://eindata.nl/)
+- [Home (Nederlands)](https://eindata.nl/nl)
+- [Privacy](https://eindata.nl/privacy)

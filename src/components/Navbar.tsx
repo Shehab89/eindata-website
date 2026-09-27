@@ -12,18 +12,19 @@ import {
 import { EinDataLogo } from '@/components/icons/EinDataLogo';
 import { useLanguage } from '@/context/LanguageContext';
 import { useTheme } from '@/context/ThemeContext';
+import { localePath } from '@/lib/i18n';
 
 const navLinks = [
-  { key: 'home' as const, href: '#home' },
   { key: 'services' as const, href: '#services' },
   { key: 'about' as const, href: '#about' },
-  { key: 'whyChoose' as const, href: '#why-choose' },
-  { key: 'projects' as const, href: '#projects' },
+  { key: 'howItWorks' as const, href: '#how-it-works' },
+  { key: 'faq' as const, href: '#faq' },
   { key: 'contact' as const, href: '#contact' },
 ];
 
 export default function Navbar() {
-  const { t, locale, toggleLocale } = useLanguage();
+  const { t, locale } = useLanguage();
+  const otherLocale = locale === 'en' ? 'nl' : 'en';
   const { isDark, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -43,10 +44,15 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
+  const mobileIconColor =
+    scrolled || isOpen
+      ? 'text-[var(--color-text)] dark:text-[var(--color-dark-text)]'
+      : 'text-white';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || isOpen
           ? 'glass border-b border-[var(--color-border)] dark:border-[var(--color-dark-border)] shadow-sm'
           : 'bg-transparent'
       }`}
@@ -55,12 +61,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <a
-            href="#home"
+            href="#top"
             className="flex items-center group"
             aria-label="EinData — Data, Cloud and AI Consultancy"
           >
             <EinDataLogo
-              variant={scrolled ? 'color' : 'white'}
+              variant={scrolled || isOpen ? 'color' : 'white'}
               size="md"
               className="transition-all duration-300 group-hover:opacity-90"
             />
@@ -85,14 +91,15 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-2">
-            <button
-              onClick={toggleLocale}
+            <a
+              href={localePath[otherLocale]}
+              hrefLang={otherLocale}
               className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg transition-all ${scrolled ? 'text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] hover:text-[var(--color-primary)] dark:hover:text-[var(--color-accent)] hover:bg-[var(--color-primary)]/5 dark:hover:bg-[var(--color-accent)]/10' : 'text-white/80 hover:text-white hover:bg-white/10'}`}
-              aria-label={`Switch to ${locale === 'en' ? 'Dutch' : 'English'}`}
+              aria-label={t.nav.switchLanguage}
             >
               <Languages className="w-4 h-4" />
-              <span className="uppercase font-semibold">{locale === 'en' ? 'NL' : 'EN'}</span>
-            </button>
+              <span className="uppercase font-semibold">{otherLocale}</span>
+            </a>
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-lg transition-all ${scrolled ? 'text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] hover:text-[var(--color-primary)] dark:hover:text-[var(--color-accent)] hover:bg-[var(--color-primary)]/5 dark:hover:bg-[var(--color-accent)]/10' : 'text-white/80 hover:text-white hover:bg-white/10'}`}
@@ -110,23 +117,24 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
-            <button
-              onClick={toggleLocale}
-              className="p-2 text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] rounded-lg"
-              aria-label={`Switch to ${locale === 'en' ? 'Dutch' : 'English'}`}
+            <a
+              href={localePath[otherLocale]}
+              hrefLang={otherLocale}
+              className={`p-2 rounded-lg ${mobileIconColor}`}
+              aria-label={t.nav.switchLanguage}
             >
-              <span className="text-sm font-bold uppercase">{locale === 'en' ? 'NL' : 'EN'}</span>
-            </button>
+              <span className="text-sm font-bold uppercase">{otherLocale}</span>
+            </a>
             <button
               onClick={toggleTheme}
-              className="p-2 text-[var(--color-text-secondary)] dark:text-[var(--color-dark-text-secondary)] rounded-lg"
+              className={`p-2 rounded-lg ${mobileIconColor}`}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-[var(--color-text)] dark:text-[var(--color-dark-text)] rounded-lg"
+              className={`p-2 rounded-lg ${mobileIconColor}`}
               aria-label="Toggle menu"
               aria-expanded={isOpen}
             >

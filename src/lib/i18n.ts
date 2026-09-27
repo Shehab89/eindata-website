@@ -1,15 +1,36 @@
 export type Locale = 'en' | 'nl';
 
+// Real business details, used across the site, metadata and structured data.
+export const site = {
+  name: 'EinData',
+  url: 'https://eindata.nl',
+  email: 'info@eindata.nl',
+  founder: 'Shehab Al-Masri',
+  linkedin: 'https://www.linkedin.com/in/shihab-masri',
+  linkedinLabel: 'linkedin.com/in/shihab-masri',
+  city: 'Eindhoven',
+  region: 'Noord-Brabant',
+  country: 'NL',
+  kvk: '42115043',
+};
+
+export const localePath: Record<Locale, string> = { en: '/', nl: '/nl' };
+
 export interface Translations {
+  meta: {
+    title: string;
+    description: string;
+  };
   nav: {
-    home: string;
     services: string;
     about: string;
-    whyChoose: string;
-    projects: string;
+    howItWorks: string;
+    faq: string;
     contact: string;
+    switchLanguage: string;
   };
   hero: {
+    badge: string;
     headline: string;
     subheadline: string;
     cta1: string;
@@ -18,70 +39,29 @@ export interface Translations {
   services: {
     title: string;
     subtitle: string;
-    cloud: {
-      title: string;
-      items: string[];
-    };
-    analytics: {
-      title: string;
-      items: string[];
-    };
-    dashboards: {
-      title: string;
-      items: string[];
-    };
-    engineering: {
-      title: string;
-      items: string[];
-    };
-    automation: {
-      title: string;
-      items: string[];
-    };
-    ai: {
-      title: string;
-      items: string[];
-    };
+    items: { title: string; description: string; points: string[] }[];
   };
   about: {
     title: string;
-    subtitle: string;
-    description: string;
-    stats: {
-      experience: string;
-      projects: string;
-      clients: string;
-      satisfaction: string;
-    };
+    headline: string;
+    paragraphs: string[];
+    role: string;
+    highlightsTitle: string;
+    highlights: string[];
+    educationTitle: string;
+    education: { degree: string; school: string; year: string }[];
+    languagesTitle: string;
+    languages: string;
   };
-  whyChoose: {
+  howItWorks: {
     title: string;
     subtitle: string;
-    items: { title: string; description: string }[];
-  };
-  process: {
-    title: string;
-    subtitle: string;
+    options: { title: string; description: string }[];
+    stepsTitle: string;
     steps: { title: string; description: string }[];
-  };
-  projects: {
-    title: string;
-    subtitle: string;
-    items: { title: string; description: string; tags: string[] }[];
-  };
-  testimonials: {
-    title: string;
-    subtitle: string;
-    items: { name: string; role: string; company: string; text: string }[];
-  };
-  cta: {
-    title: string;
-    subtitle: string;
-    button: string;
   };
   faq: {
     title: string;
-    subtitle: string;
     items: { question: string; answer: string }[];
   };
   contact: {
@@ -93,588 +73,486 @@ export interface Translations {
       company: string;
       message: string;
       submit: string;
+      sending: string;
       success: string;
+      error: string;
+      privacy: string;
     };
     info: {
       email: string;
       location: string;
       linkedin: string;
+      response: string;
     };
   };
   footer: {
     description: string;
-    quickLinks: string;
-    legal: string;
     privacy: string;
-    terms: string;
-    connect: string;
-    copyright: string;
+    rights: string;
+  };
+  privacy: {
+    title: string;
+    updated: string;
+    sections: { heading: string; body: string }[];
+    back: string;
   };
 }
 
 export const translations: Record<Locale, Translations> = {
   en: {
+    meta: {
+      title: 'EinData | Freelance Data Analyst & Azure Data Engineer in Eindhoven',
+      description:
+        'EinData is the freelance data consultancy of Shehab Al-Masri (MSc Applied Data Science) in Eindhoven. Azure data pipelines, Power BI dashboards, reporting automation and data analysis for businesses in the Netherlands.',
+    },
     nav: {
-      home: 'Home',
       services: 'Services',
       about: 'About',
-      whyChoose: 'Why EinData',
-      projects: 'Projects',
+      howItWorks: 'How it works',
+      faq: 'FAQ',
       contact: 'Contact',
+      switchLanguage: 'Nederlands',
     },
     hero: {
-      headline: 'Cloud & Data Solutions That Help Your Business Grow',
+      badge: 'Freelance data consultant · Eindhoven',
+      headline: 'Turn your data into clear answers',
       subheadline:
-        'EinData empowers organizations with cloud services, business intelligence, data analytics, automation, and AI solutions that transform raw data into actionable insights.',
-      cta1: 'Book a Consultation',
-      cta2: 'Our Services',
+        "I'm Shehab Al-Masri, a freelance data analyst and Azure data engineer. I build data pipelines, Power BI dashboards and automated reports, so your team spends less time on spreadsheets and more time on decisions.",
+      cta1: 'Get in touch',
+      cta2: 'View services',
     },
     services: {
-      title: 'Our Services',
-      subtitle: 'End-to-end data solutions tailored to your business needs',
-      cloud: {
-        title: 'Cloud Services',
-        items: [
-          'Cloud migration',
-          'Cloud architecture',
-          'Microsoft Azure consulting',
-          'Cloud optimization',
-        ],
-      },
-      analytics: {
-        title: 'Data Analytics',
-        items: [
-          'Data analysis',
-          'KPI development',
-          'Business insights',
-          'Trend analysis',
-        ],
-      },
-      dashboards: {
-        title: 'Dashboards & BI',
-        items: [
-          'Power BI dashboards',
-          'Interactive reports',
-          'Executive dashboards',
-          'Performance monitoring',
-        ],
-      },
-      engineering: {
-        title: 'Data Engineering',
-        items: [
-          'ETL pipelines',
-          'Data integration',
-          'Data cleaning',
-          'Data warehousing',
-        ],
-      },
-      automation: {
-        title: 'Automation',
-        items: [
-          'Workflow automation',
-          'Reporting automation',
-          'Data pipelines',
-          'Scheduled analytics',
-        ],
-      },
-      ai: {
-        title: 'AI Solutions',
-        items: [
-          'Predictive analytics',
-          'Machine learning',
-          'NLP',
-          'AI-powered reporting',
-        ],
-      },
+      title: 'What I can do for you',
+      subtitle: 'Four practical services, from raw data to a working report.',
+      items: [
+        {
+          title: 'Azure data engineering',
+          description:
+            'Get your data out of scattered files and systems into one reliable place.',
+          points: [
+            'ETL/ELT pipelines with Azure Data Factory',
+            'Azure SQL Database and Synapse Analytics',
+            'Moving spreadsheet data to the cloud',
+            'Python, SQL and PySpark',
+          ],
+        },
+        {
+          title: 'Dashboards & reporting',
+          description:
+            'See your key numbers at a glance, always up to date.',
+          points: [
+            'Power BI and Tableau dashboards',
+            'Defining the right KPIs',
+            'Automated recurring reports',
+            'Budget and performance trackers',
+          ],
+        },
+        {
+          title: 'Data analysis',
+          description:
+            'Clean, reliable data and plain-language answers to your questions.',
+          points: [
+            'Data cleaning and quality checks',
+            'Survey and statistical analysis',
+            'Trend analysis',
+            'Clear written insight reports',
+          ],
+        },
+        {
+          title: 'AI & automation',
+          description:
+            'Let software handle the repetitive work.',
+          points: [
+            'Text mining and NLP (e.g. social media, feedback)',
+            'Machine learning with scikit-learn',
+            'LLM-based workflows',
+            'Workflow automation with Python and n8n',
+          ],
+        },
+      ],
     },
     about: {
-      title: 'About EinData',
-      subtitle: 'Passionate about transforming data into business value',
-      description:
-        'EinData was founded by Shehab Al-Masri, a data professional passionate about helping organizations unlock the full value of their data. Combining expertise in cloud technologies, analytics, and business intelligence, EinData delivers practical solutions that improve efficiency, reduce manual work, and enable smarter decision-making.',
-      stats: {
-        experience: 'Years Experience',
-        projects: 'Projects Delivered',
-        clients: 'Happy Clients',
-        satisfaction: 'Client Satisfaction',
-      },
+      title: 'About',
+      headline: 'Hi, I’m Shehab',
+      paragraphs: [
+        'EinData is my own data consultancy, based in Eindhoven and registered with the Dutch Chamber of Commerce (KVK). When you work with EinData, you work directly with me.',
+        'I hold an MSc in Applied Data Science from Utrecht University and a background in electrical engineering. Since 2020 I have worked as a data analyst and data manager for international organisations such as RNW Media, Internews, ACLED and MochaValley: building dashboards, automating reports, managing data pipelines and analysing survey and social-media data.',
+        'Today I help businesses in the Netherlands do the same with Microsoft Azure, Python, SQL and Power BI.',
+      ],
+      role: 'Founder, EinData',
+      highlightsTitle: 'From my work so far',
+      highlights: [
+        'Automated reporting for 15+ dashboards tracking 20+ KPIs (RNW Media)',
+        'NLP and text-mining analysis of social-media discourse for 6 partner organisations (RNW Media)',
+        'Led information management and multi-source data pipelines for a humanitarian project (Internews)',
+        'Designed a survey and analysed data from 300+ coffee farmers (MochaValley)',
+        'Led a 5-person data team managing records for 17,000+ beneficiaries (RECO-Yemen)',
+      ],
+      educationTitle: 'Education',
+      education: [
+        { degree: 'MSc Applied Data Science', school: 'Utrecht University', year: '2024' },
+        { degree: 'Postgraduate Diploma in Big Data & Data Science', school: 'Nile University', year: '2022' },
+        { degree: 'BSc Electrical Engineering (Communications & Electronics)', school: 'Sana’a University', year: '2012' },
+      ],
+      languagesTitle: 'Languages',
+      languages: 'English (fluent) · Dutch (B1, improving) · Arabic (native)',
     },
-    whyChoose: {
-      title: 'Why Choose EinData',
-      subtitle: 'What sets us apart in delivering data solutions',
-      items: [
+    howItWorks: {
+      title: 'How we can work together',
+      subtitle: 'Pick the format that fits your situation.',
+      options: [
         {
-          title: 'Data-Driven Solutions',
+          title: 'Freelance / interim',
           description:
-            'Every recommendation is backed by data analysis, ensuring decisions that deliver measurable results.',
+            'Part-time or full-time in your team, remote or on-site anywhere in the Netherlands. Directly or through your usual agency.',
         },
         {
-          title: 'Personalized Consulting',
+          title: 'Fixed project',
           description:
-            'Tailored strategies that address your unique business challenges and goals.',
+            'A clearly defined result, such as an Azure data pipeline or a Power BI dashboard, with scope and price agreed up front.',
         },
         {
-          title: 'Modern Cloud Technologies',
+          title: 'Hours bundle',
           description:
-            'Leveraging Microsoft Azure and leading cloud platforms for scalable, future-proof solutions.',
-        },
-        {
-          title: 'Secure & Scalable',
-          description:
-            'Enterprise-grade security and architecture designed to grow with your business.',
-        },
-        {
-          title: 'Business-Focused Approach',
-          description:
-            'Technology serves your business objectives — not the other way around.',
-        },
-        {
-          title: 'Clear Communication',
-          description:
-            'Complex technical concepts explained in plain language. No jargon, no confusion.',
-        },
-        {
-          title: 'Automation Expertise',
-          description:
-            'Streamline repetitive tasks and reporting so your team can focus on what matters.',
-        },
-        {
-          title: 'Reliable Partnership',
-          description:
-            'Long-term collaboration built on trust, transparency, and consistent delivery.',
+            'A flexible block of hours for smaller businesses that need occasional help or dashboard maintenance.',
         },
       ],
-    },
-    process: {
-      title: 'Our Process',
-      subtitle: 'A structured approach to delivering data solutions',
+      stepsTitle: 'The process',
       steps: [
         {
-          title: 'Discovery',
-          description:
-            'Understanding your business, data landscape, and key challenges through in-depth consultation.',
+          title: 'Intro call',
+          description: 'A short, free call to understand your question and your data.',
         },
         {
-          title: 'Planning',
-          description:
-            'Defining a clear roadmap with milestones, deliverables, and success metrics.',
+          title: 'Proposal',
+          description: 'A clear plan with deliverables, timeline and cost. No surprises.',
         },
         {
-          title: 'Data Collection',
-          description:
-            'Gathering, connecting, and preparing your data sources for analysis.',
-        },
-        {
-          title: 'Analysis & Implementation',
-          description:
-            'Building solutions — from dashboards and pipelines to automation workflows.',
-        },
-        {
-          title: 'Insights & Improvement',
-          description:
-            'Delivering actionable insights and continuously optimizing for better outcomes.',
+          title: 'Build & hand over',
+          description: 'I build the solution, document it and make sure your team can use it.',
         },
       ],
-    },
-    projects: {
-      title: 'Featured Projects',
-      subtitle: 'Real solutions delivering real business impact',
-      items: [
-        {
-          title: 'Cloud Migration for a Retail Company',
-          description:
-            'Migrated on-premises data infrastructure to Microsoft Azure, reducing operational costs by 40% and improving data accessibility across 12 retail locations. Implemented automated backups and disaster recovery.',
-          tags: ['Azure', 'Cloud Migration', 'Cost Optimization'],
-        },
-        {
-          title: 'Power BI Executive Dashboard',
-          description:
-            'Designed and deployed an interactive executive dashboard for a logistics company, consolidating data from 5 systems into real-time KPI monitoring. Reduced reporting time from 3 days to instant access.',
-          tags: ['Power BI', 'Data Integration', 'KPI Monitoring'],
-        },
-        {
-          title: 'Customer Analytics Platform',
-          description:
-            'Built a customer analytics platform for an e-commerce business, combining purchase history, behavior data, and marketing metrics. Enabled predictive churn analysis that improved retention by 25%.',
-          tags: ['Analytics', 'Machine Learning', 'E-commerce'],
-        },
-      ],
-    },
-    testimonials: {
-      title: 'What Our Clients Say',
-      subtitle: 'Trusted by businesses across the Netherlands',
-      items: [
-        {
-          name: 'Mark de Vries',
-          role: 'CTO',
-          company: 'RetailFlow BV',
-          text: 'EinData transformed our data infrastructure. The migration to Azure was seamless, and our teams now have real-time access to the insights they need. The cost savings alone exceeded our expectations.',
-        },
-        {
-          name: 'Lisa Jansen',
-          role: 'Operations Director',
-          company: 'LogiTrans Group',
-          text: 'The Power BI dashboards EinData built changed how we make decisions. What used to take days of manual reporting now happens in real-time. Shehab truly understands both data and business.',
-        },
-        {
-          name: 'Thomas van den Berg',
-          role: 'CEO',
-          company: 'DigiCommerce',
-          text: 'Working with EinData gave us a clear picture of our customer behavior for the first time. The predictive analytics platform has been instrumental in reducing churn and increasing revenue.',
-        },
-      ],
-    },
-    cta: {
-      title: 'Ready to Unlock the Value of Your Data?',
-      subtitle:
-        "Let's discuss how EinData can help your business make smarter, data-driven decisions.",
-      button: 'Book a Free Consultation',
     },
     faq: {
-      title: 'Frequently Asked Questions',
-      subtitle: 'Everything you need to know about working with EinData',
+      title: 'Frequently asked questions',
       items: [
         {
-          question: 'What types of businesses does EinData work with?',
+          question: 'What does EinData do?',
           answer:
-            'EinData works primarily with small and medium-sized businesses, startups, and organizations looking to leverage their data more effectively. Whether you\'re starting your cloud transformation or need advanced analytics, we tailor our approach to your specific needs and budget.',
+            'EinData is a freelance data consultancy in Eindhoven run by Shehab Al-Masri. I help businesses collect, clean and analyse their data, build data pipelines on Microsoft Azure, create Power BI and Tableau dashboards, and automate reporting.',
         },
         {
-          question: 'Which cloud platforms do you specialize in?',
+          question: 'Who do you work with?',
           answer:
-            'We specialize in Microsoft Azure, including Azure Data Factory, Azure SQL, Azure Synapse Analytics, and other Azure services. We also have experience with multi-cloud environments and can advise on the best platform for your specific requirements.',
+            'Small and medium-sized businesses that want better insight from their data, and larger organisations or IT agencies that need an extra data analyst or Azure data engineer in their team.',
         },
         {
-          question: 'How long does a typical project take?',
+          question: 'Which tools and technologies do you use?',
           answer:
-            'Project timelines vary depending on scope and complexity. A dashboard project might take 2-4 weeks, while a full cloud migration could take 2-3 months. During our discovery phase, we provide a clear timeline with milestones so you know exactly what to expect.',
+            'Microsoft Azure (Data Factory, SQL Database, Synapse Analytics, Machine Learning), Python (pandas, scikit-learn, PySpark), SQL, R, Power BI, Tableau and Excel.',
         },
         {
-          question: 'Do you offer ongoing support after project delivery?',
+          question: 'Do you work remotely or on-site?',
           answer:
-            'Yes, we offer ongoing support and maintenance packages. Data solutions require regular optimization, and we provide monitoring, updates, and continuous improvement services to ensure your solutions evolve with your business.',
+            'Both. I am based in Eindhoven (Brainport region) and work remotely, on-site, or hybrid anywhere in the Netherlands.',
         },
         {
-          question: 'What makes EinData different from larger consulting firms?',
+          question: 'Do you speak Dutch?',
           answer:
-            'As a specialized consultancy, EinData offers direct access to senior expertise without the overhead of large firms. You work directly with Shehab, ensuring consistent quality, clear communication, and solutions that are practical and business-focused — not over-engineered.',
+            'I work in English and speak Dutch at B1 level, which I am actively improving. Most of my technical work (code, documentation, dashboards) can be delivered in either language.',
         },
         {
-          question: 'Can you help with data that is currently in spreadsheets?',
+          question: 'Our data is all in Excel. Can you still help?',
           answer:
-            'Absolutely. Many businesses start with data in Excel or Google Sheets. We can help you transition to a proper data infrastructure, automate reporting, and build dashboards that give you much deeper insights than spreadsheets ever could.',
+            'Yes. Many businesses start with spreadsheets. I can clean and combine them, move them to a proper database and build a dashboard that updates automatically.',
+        },
+        {
+          question: 'How do we get started?',
+          answer:
+            'Send a message through the contact form or email info@eindata.nl. I usually reply within two working days and we can plan a short intro call.',
         },
       ],
     },
     contact: {
-      title: 'Get in Touch',
-      subtitle:
-        'Ready to start your data journey? Send us a message and we\'ll get back to you within 24 hours.',
+      title: 'Get in touch',
+      subtitle: 'Tell me briefly what you are working on. I usually reply within two working days.',
       form: {
-        name: 'Full Name',
-        email: 'Email Address',
-        company: 'Company Name',
-        message: 'Tell us about your project',
-        submit: 'Send Message',
-        success: 'Thank you! Your message has been sent successfully. We\'ll get back to you soon.',
+        name: 'Name',
+        email: 'Email',
+        company: 'Company (optional)',
+        message: 'How can I help?',
+        submit: 'Send message',
+        sending: 'Sending…',
+        success: 'Thank you! Your message has been sent. I will get back to you soon.',
+        error: 'Sorry, the message could not be sent. Please email me directly at',
+        privacy: 'Your details are only used to reply to your message.',
       },
       info: {
-        email: 'info@eindata.nl',
-        location: 'The Netherlands',
+        email: 'Email',
+        location: 'Location',
         linkedin: 'LinkedIn',
+        response: 'Reply within two working days',
       },
     },
     footer: {
-      description:
-        'Helping businesses transform data into valuable insights through cloud technologies, analytics, and AI.',
-      quickLinks: 'Quick Links',
-      legal: 'Legal',
-      privacy: 'Privacy Policy',
-      terms: 'Terms & Conditions',
-      connect: 'Connect',
-      copyright: '© 2026 EinData. All rights reserved.',
+      description: 'Freelance data analysis, Azure data engineering and Power BI dashboards from Eindhoven.',
+      privacy: 'Privacy',
+      rights: 'All rights reserved.',
+    },
+    privacy: {
+      title: 'Privacy statement',
+      updated: 'Last updated: September 2026',
+      sections: [
+        {
+          heading: 'Who we are',
+          body: 'EinData is a sole proprietorship (eenmanszaak) of Shehab Al-Masri, based in Eindhoven, the Netherlands, registered with the Dutch Chamber of Commerce under KVK number 42115043. Contact: info@eindata.nl.',
+        },
+        {
+          heading: 'What data we collect',
+          body: 'When you use the contact form or email us, we receive your name, email address, company name (if provided) and your message. This website does not use tracking or advertising cookies.',
+        },
+        {
+          heading: 'Why we use it',
+          body: 'Only to answer your question and, if we work together, to prepare a proposal and carry out the work. We do not sell or share your data for marketing.',
+        },
+        {
+          heading: 'How long we keep it',
+          body: 'Messages that do not lead to a collaboration are deleted within 12 months. Client administration is kept for 7 years, as required by Dutch tax law.',
+        },
+        {
+          heading: 'Your rights',
+          body: 'You can ask to see, correct or delete your personal data at any time by emailing info@eindata.nl. You can also file a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens).',
+        },
+      ],
+      back: 'Back to home',
     },
   },
   nl: {
+    meta: {
+      title: 'EinData | Freelance Data-analist & Azure Data Engineer in Eindhoven',
+      description:
+        'EinData is het freelance data-adviesbureau van Shehab Al-Masri (MSc Applied Data Science) in Eindhoven. Azure datapipelines, Power BI-dashboards, geautomatiseerde rapportages en data-analyse voor bedrijven in Nederland.',
+    },
     nav: {
-      home: 'Home',
       services: 'Diensten',
-      about: 'Over Ons',
-      whyChoose: 'Waarom EinData',
-      projects: 'Projecten',
+      about: 'Over mij',
+      howItWorks: 'Werkwijze',
+      faq: 'FAQ',
       contact: 'Contact',
+      switchLanguage: 'English',
     },
     hero: {
-      headline: 'Cloud- & Data-oplossingen Die Uw Bedrijf Laten Groeien',
+      badge: 'Freelance data-consultant · Eindhoven',
+      headline: 'Van data naar heldere antwoorden',
       subheadline:
-        'EinData versterkt organisaties met clouddiensten, business intelligence, data-analyse, automatisering en AI-oplossingen die ruwe data omzetten in bruikbare inzichten.',
-      cta1: 'Boek een Consultatie',
-      cta2: 'Onze Diensten',
+        'Ik ben Shehab Al-Masri, freelance data-analist en Azure data engineer. Ik bouw datapipelines, Power BI-dashboards en geautomatiseerde rapportages, zodat uw team minder tijd kwijt is aan spreadsheets en meer tijd heeft voor beslissingen.',
+      cta1: 'Neem contact op',
+      cta2: 'Bekijk diensten',
     },
     services: {
-      title: 'Onze Diensten',
-      subtitle: 'End-to-end data-oplossingen afgestemd op uw bedrijfsbehoeften',
-      cloud: {
-        title: 'Clouddiensten',
-        items: [
-          'Cloudmigratie',
-          'Cloudarchitectuur',
-          'Microsoft Azure consulting',
-          'Cloudoptimalisatie',
-        ],
-      },
-      analytics: {
-        title: 'Data-analyse',
-        items: [
-          'Data-analyse',
-          'KPI-ontwikkeling',
-          'Bedrijfsinzichten',
-          'Trendanalyse',
-        ],
-      },
-      dashboards: {
-        title: 'Dashboards & BI',
-        items: [
-          'Power BI-dashboards',
-          'Interactieve rapporten',
-          'Executive dashboards',
-          'Prestatiemonitoring',
-        ],
-      },
-      engineering: {
-        title: 'Data Engineering',
-        items: [
-          'ETL-pipelines',
-          'Data-integratie',
-          'Dataopschoning',
-          'Data warehousing',
-        ],
-      },
-      automation: {
-        title: 'Automatisering',
-        items: [
-          'Workflowautomatisering',
-          'Rapportage-automatisering',
-          'Datapipelines',
-          'Geplande analyses',
-        ],
-      },
-      ai: {
-        title: 'AI-oplossingen',
-        items: [
-          'Predictieve analyses',
-          'Machine learning',
-          'NLP',
-          'AI-gestuurde rapportage',
-        ],
-      },
+      title: 'Wat ik voor u kan doen',
+      subtitle: 'Vier praktische diensten, van ruwe data tot een werkend rapport.',
+      items: [
+        {
+          title: 'Azure data engineering',
+          description:
+            'Haal uw data uit losse bestanden en systemen en breng het samen op één betrouwbare plek.',
+          points: [
+            'ETL/ELT-pipelines met Azure Data Factory',
+            'Azure SQL Database en Synapse Analytics',
+            'Spreadsheetdata naar de cloud',
+            'Python, SQL en PySpark',
+          ],
+        },
+        {
+          title: 'Dashboards & rapportage',
+          description:
+            'Uw belangrijkste cijfers in één oogopslag, altijd actueel.',
+          points: [
+            'Power BI- en Tableau-dashboards',
+            'De juiste KPI’s bepalen',
+            'Geautomatiseerde periodieke rapportages',
+            'Budget- en prestatietrackers',
+          ],
+        },
+        {
+          title: 'Data-analyse',
+          description:
+            'Schone, betrouwbare data en antwoorden in begrijpelijke taal.',
+          points: [
+            'Data opschonen en kwaliteitscontroles',
+            'Enquête- en statistische analyse',
+            'Trendanalyse',
+            'Heldere rapporten met inzichten',
+          ],
+        },
+        {
+          title: 'AI & automatisering',
+          description:
+            'Laat software het herhalende werk doen.',
+          points: [
+            'Tekstanalyse en NLP (bijv. social media, feedback)',
+            'Machine learning met scikit-learn',
+            'Workflows met LLM’s',
+            'Automatisering met Python en n8n',
+          ],
+        },
+      ],
     },
     about: {
-      title: 'Over EinData',
-      subtitle: 'Gepassioneerd door het omzetten van data in bedrijfswaarde',
-      description:
-        'EinData is opgericht door Shehab Al-Masri, een data-professional die gepassioneerd is door het helpen van organisaties bij het ontsluiten van de volledige waarde van hun data. Door expertise in cloudtechnologieën, analytics en business intelligence te combineren, levert EinData praktische oplossingen die de efficiëntie verbeteren, handmatig werk verminderen en slimmer besluitvorming mogelijk maken.',
-      stats: {
-        experience: 'Jaar Ervaring',
-        projects: 'Projecten Opgeleverd',
-        clients: 'Tevreden Klanten',
-        satisfaction: 'Klanttevredenheid',
-      },
+      title: 'Over mij',
+      headline: 'Hallo, ik ben Shehab',
+      paragraphs: [
+        'EinData is mijn eigen data-adviesbureau, gevestigd in Eindhoven en ingeschreven bij de Kamer van Koophandel (KVK). Als u met EinData werkt, werkt u rechtstreeks met mij.',
+        'Ik heb een MSc Applied Data Science van de Universiteit Utrecht en een achtergrond in elektrotechniek. Sinds 2020 werk ik als data-analist en databeheerder voor internationale organisaties zoals RNW Media, Internews, ACLED en MochaValley: dashboards bouwen, rapportages automatiseren, datapipelines beheren en enquête- en social-mediadata analyseren.',
+        'Nu help ik bedrijven in Nederland hetzelfde te doen met Microsoft Azure, Python, SQL en Power BI.',
+      ],
+      role: 'Oprichter, EinData',
+      highlightsTitle: 'Uit mijn werk tot nu toe',
+      highlights: [
+        'Rapportage geautomatiseerd voor 15+ dashboards met 20+ KPI’s (RNW Media)',
+        'NLP- en tekstanalyse van social-mediadiscussies voor 6 partnerorganisaties (RNW Media)',
+        'Informatiebeheer en datapipelines uit meerdere bronnen geleid voor een humanitair project (Internews)',
+        'Enquête ontworpen en data van 300+ koffieboeren geanalyseerd (MochaValley)',
+        'Een datateam van 5 personen geleid met gegevens van 17.000+ begunstigden (RECO-Yemen)',
+      ],
+      educationTitle: 'Opleiding',
+      education: [
+        { degree: 'MSc Applied Data Science', school: 'Universiteit Utrecht', year: '2024' },
+        { degree: 'Postgraduaat Big Data & Data Science', school: 'Nile University', year: '2022' },
+        { degree: 'BSc Elektrotechniek (Communicatie & Elektronica)', school: 'Sana’a University', year: '2012' },
+      ],
+      languagesTitle: 'Talen',
+      languages: 'Engels (vloeiend) · Nederlands (B1, in ontwikkeling) · Arabisch (moedertaal)',
     },
-    whyChoose: {
-      title: 'Waarom EinData Kiezen',
-      subtitle: 'Wat ons onderscheidt in het leveren van data-oplossingen',
-      items: [
+    howItWorks: {
+      title: 'Hoe we kunnen samenwerken',
+      subtitle: 'Kies de vorm die bij uw situatie past.',
+      options: [
         {
-          title: 'Datagedreven Oplossingen',
+          title: 'Freelance / interim',
           description:
-            'Elke aanbeveling is onderbouwd met data-analyse, wat zorgt voor beslissingen met meetbare resultaten.',
+            'Deeltijd of voltijd in uw team, op afstand of op locatie in heel Nederland. Rechtstreeks of via uw vaste bemiddelaar.',
         },
         {
-          title: 'Persoonlijk Advies',
+          title: 'Vast project',
           description:
-            'Strategieën op maat die uw unieke zakelijke uitdagingen en doelen aanpakken.',
+            'Een duidelijk omschreven resultaat, zoals een Azure-datapipeline of een Power BI-dashboard, met scope en prijs vooraf afgesproken.',
         },
         {
-          title: 'Moderne Cloudtechnologieën',
+          title: 'Strippenkaart',
           description:
-            'Gebruik van Microsoft Azure en toonaangevende cloudplatforms voor schaalbare, toekomstbestendige oplossingen.',
-        },
-        {
-          title: 'Veilig & Schaalbaar',
-          description:
-            'Enterprise-grade beveiliging en architectuur ontworpen om met uw bedrijf mee te groeien.',
-        },
-        {
-          title: 'Bedrijfsgerichte Aanpak',
-          description:
-            'Technologie staat in dienst van uw bedrijfsdoelen — niet andersom.',
-        },
-        {
-          title: 'Heldere Communicatie',
-          description:
-            'Complexe technische concepten uitgelegd in duidelijke taal. Geen jargon, geen verwarring.',
-        },
-        {
-          title: 'Automatiseringsexpertise',
-          description:
-            'Stroomlijn repetitieve taken en rapportages zodat uw team zich kan richten op wat belangrijk is.',
-        },
-        {
-          title: 'Betrouwbaar Partnerschap',
-          description:
-            'Langdurige samenwerking gebouwd op vertrouwen, transparantie en consistente levering.',
+            'Een flexibel blok uren voor kleinere bedrijven die af en toe hulp of dashboardonderhoud nodig hebben.',
         },
       ],
-    },
-    process: {
-      title: 'Ons Proces',
-      subtitle: 'Een gestructureerde aanpak voor het leveren van data-oplossingen',
+      stepsTitle: 'Het proces',
       steps: [
         {
-          title: 'Ontdekking',
-          description:
-            'Uw bedrijf, datalandschap en belangrijkste uitdagingen begrijpen door diepgaande consultatie.',
+          title: 'Kennismaking',
+          description: 'Een kort, gratis gesprek om uw vraag en uw data te begrijpen.',
         },
         {
-          title: 'Planning',
-          description:
-            'Een duidelijke roadmap definiëren met mijlpalen, deliverables en succescriteria.',
+          title: 'Voorstel',
+          description: 'Een helder plan met resultaten, planning en kosten. Geen verrassingen.',
         },
         {
-          title: 'Dataverzameling',
-          description:
-            'Uw databronnen verzamelen, verbinden en voorbereiden voor analyse.',
-        },
-        {
-          title: 'Analyse & Implementatie',
-          description:
-            'Oplossingen bouwen — van dashboards en pipelines tot automatiseringsworkflows.',
-        },
-        {
-          title: 'Inzichten & Verbetering',
-          description:
-            'Bruikbare inzichten leveren en continu optimaliseren voor betere resultaten.',
+          title: 'Bouwen & overdragen',
+          description: 'Ik bouw de oplossing, documenteer die en zorg dat uw team ermee kan werken.',
         },
       ],
-    },
-    projects: {
-      title: 'Uitgelichte Projecten',
-      subtitle: 'Echte oplossingen met echte bedrijfsimpact',
-      items: [
-        {
-          title: 'Cloudmigratie voor een Retailbedrijf',
-          description:
-            'On-premises data-infrastructuur gemigreerd naar Microsoft Azure, waardoor operationele kosten met 40% werden verlaagd en data-toegankelijkheid over 12 locaties werd verbeterd. Geautomatiseerde back-ups en disaster recovery geïmplementeerd.',
-          tags: ['Azure', 'Cloudmigratie', 'Kostenoptimalisatie'],
-        },
-        {
-          title: 'Power BI Executive Dashboard',
-          description:
-            'Een interactief executive dashboard ontworpen en geïmplementeerd voor een logistiek bedrijf, waarbij data uit 5 systemen werd gecombineerd tot real-time KPI-monitoring. Rapportagetijd teruggebracht van 3 dagen naar directe toegang.',
-          tags: ['Power BI', 'Data-integratie', 'KPI-monitoring'],
-        },
-        {
-          title: 'Klantanalyseplatform',
-          description:
-            'Een klantanalyseplatform gebouwd voor een e-commercebedrijf, waarbij aankoophistorie, gedragsdata en marketingmetrics werden gecombineerd. Predictieve churn-analyse mogelijk gemaakt die de retentie met 25% verbeterde.',
-          tags: ['Analytics', 'Machine Learning', 'E-commerce'],
-        },
-      ],
-    },
-    testimonials: {
-      title: 'Wat Onze Klanten Zeggen',
-      subtitle: 'Vertrouwd door bedrijven in heel Nederland',
-      items: [
-        {
-          name: 'Mark de Vries',
-          role: 'CTO',
-          company: 'RetailFlow BV',
-          text: 'EinData heeft onze data-infrastructuur getransformeerd. De migratie naar Azure verliep naadloos en onze teams hebben nu real-time toegang tot de inzichten die ze nodig hebben. De kostenbesparingen alleen al overtroffen onze verwachtingen.',
-        },
-        {
-          name: 'Lisa Jansen',
-          role: 'Operations Director',
-          company: 'LogiTrans Group',
-          text: 'De Power BI-dashboards die EinData heeft gebouwd, hebben veranderd hoe wij beslissingen nemen. Wat vroeger dagen handmatige rapportage kostte, gebeurt nu in real-time. Shehab begrijpt echt zowel data als business.',
-        },
-        {
-          name: 'Thomas van den Berg',
-          role: 'CEO',
-          company: 'DigiCommerce',
-          text: 'Samenwerken met EinData gaf ons voor het eerst een helder beeld van het gedrag van onze klanten. Het predictieve analyseplatform is cruciaal geweest bij het verminderen van churn en het verhogen van omzet.',
-        },
-      ],
-    },
-    cta: {
-      title: 'Klaar om de Waarde van Uw Data te Ontsluiten?',
-      subtitle:
-        'Laten we bespreken hoe EinData uw bedrijf kan helpen slimmere, datagedreven beslissingen te nemen.',
-      button: 'Boek een Gratis Consultatie',
     },
     faq: {
-      title: 'Veelgestelde Vragen',
-      subtitle: 'Alles wat u moet weten over samenwerken met EinData',
+      title: 'Veelgestelde vragen',
       items: [
         {
-          question: 'Met welke soorten bedrijven werkt EinData?',
+          question: 'Wat doet EinData?',
           answer:
-            'EinData werkt voornamelijk met het midden- en kleinbedrijf, startups en organisaties die hun data effectiever willen inzetten. Of u nu aan het begin staat van uw cloudtransformatie of geavanceerde analytics nodig heeft, wij stemmen onze aanpak af op uw specifieke behoeften en budget.',
+            'EinData is een freelance data-adviesbureau in Eindhoven van Shehab Al-Masri. Ik help bedrijven hun data te verzamelen, op te schonen en te analyseren, bouw datapipelines op Microsoft Azure, maak Power BI- en Tableau-dashboards en automatiseer rapportages.',
         },
         {
-          question: 'In welke cloudplatforms bent u gespecialiseerd?',
+          question: 'Met wie werkt u?',
           answer:
-            'Wij zijn gespecialiseerd in Microsoft Azure, waaronder Azure Data Factory, Azure SQL, Azure Synapse Analytics en andere Azure-diensten. We hebben ook ervaring met multi-cloud-omgevingen en kunnen adviseren over het beste platform voor uw specifieke vereisten.',
+            'Met mkb-bedrijven die meer inzicht uit hun data willen halen, en met grotere organisaties of IT-bemiddelaars die een extra data-analist of Azure data engineer in hun team nodig hebben.',
         },
         {
-          question: 'Hoe lang duurt een typisch project?',
+          question: 'Welke tools en technologieën gebruikt u?',
           answer:
-            'Projecttijdlijnen variëren afhankelijk van omvang en complexiteit. Een dashboardproject kan 2-4 weken duren, terwijl een volledige cloudmigratie 2-3 maanden kan kosten. Tijdens onze ontdekkingsfase geven we een duidelijke tijdlijn met mijlpalen zodat u precies weet wat u kunt verwachten.',
+            'Microsoft Azure (Data Factory, SQL Database, Synapse Analytics, Machine Learning), Python (pandas, scikit-learn, PySpark), SQL, R, Power BI, Tableau en Excel.',
         },
         {
-          question: 'Bieden jullie doorlopende ondersteuning na oplevering?',
+          question: 'Werkt u op afstand of op locatie?',
           answer:
-            'Ja, wij bieden doorlopende ondersteuning en onderhoudspakketten. Data-oplossingen vereisen regelmatige optimalisatie en we bieden monitoring, updates en continue verbeteringsservices om ervoor te zorgen dat uw oplossingen met uw bedrijf meegroeien.',
+            'Beide. Ik ben gevestigd in Eindhoven (Brainport-regio) en werk op afstand, op locatie of hybride in heel Nederland.',
         },
         {
-          question: 'Wat maakt EinData anders dan grotere adviesbureaus?',
+          question: 'Spreekt u Nederlands?',
           answer:
-            'Als gespecialiseerd adviesbureau biedt EinData directe toegang tot senior expertise zonder de overhead van grote bureaus. U werkt rechtstreeks met Shehab, wat zorgt voor consistente kwaliteit, heldere communicatie en oplossingen die praktisch en bedrijfsgericht zijn — niet over-engineered.',
+            'Ik werk in het Engels en spreek Nederlands op B1-niveau, dat ik actief verbeter. Het meeste technische werk (code, documentatie, dashboards) kan ik in beide talen opleveren.',
         },
         {
-          question: 'Kunnen jullie helpen met data die nu in spreadsheets staat?',
+          question: 'Onze data staat in Excel. Kunt u dan helpen?',
           answer:
-            'Absoluut. Veel bedrijven beginnen met data in Excel of Google Sheets. Wij kunnen u helpen bij de transitie naar een goede data-infrastructuur, het automatiseren van rapportages en het bouwen van dashboards die u veel diepere inzichten geven dan spreadsheets ooit konden.',
+            'Ja. Veel bedrijven beginnen met spreadsheets. Ik kan ze opschonen en combineren, overzetten naar een echte database en een dashboard bouwen dat automatisch bijwerkt.',
+        },
+        {
+          question: 'Hoe beginnen we?',
+          answer:
+            'Stuur een bericht via het contactformulier of mail naar info@eindata.nl. Ik reageer meestal binnen twee werkdagen en we plannen een korte kennismaking.',
         },
       ],
     },
     contact: {
-      title: 'Neem Contact Op',
-      subtitle:
-        'Klaar om uw datareis te beginnen? Stuur ons een bericht en we nemen binnen 24 uur contact met u op.',
+      title: 'Neem contact op',
+      subtitle: 'Vertel kort waar u mee bezig bent. Ik reageer meestal binnen twee werkdagen.',
       form: {
-        name: 'Volledige Naam',
-        email: 'E-mailadres',
-        company: 'Bedrijfsnaam',
-        message: 'Vertel ons over uw project',
-        submit: 'Bericht Versturen',
-        success: 'Bedankt! Uw bericht is succesvol verzonden. We nemen snel contact met u op.',
+        name: 'Naam',
+        email: 'E-mail',
+        company: 'Bedrijf (optioneel)',
+        message: 'Waarmee kan ik helpen?',
+        submit: 'Verstuur bericht',
+        sending: 'Versturen…',
+        success: 'Bedankt! Uw bericht is verzonden. Ik neem snel contact met u op.',
+        error: 'Sorry, het bericht kon niet worden verzonden. Mail mij direct via',
+        privacy: 'Uw gegevens worden alleen gebruikt om op uw bericht te reageren.',
       },
       info: {
-        email: 'info@eindata.nl',
-        location: 'Nederland',
+        email: 'E-mail',
+        location: 'Locatie',
         linkedin: 'LinkedIn',
+        response: 'Reactie binnen twee werkdagen',
       },
     },
     footer: {
-      description:
-        'Wij helpen bedrijven data om te zetten in waardevolle inzichten door middel van cloudtechnologieën, analytics en AI.',
-      quickLinks: 'Snelle Links',
-      legal: 'Juridisch',
-      privacy: 'Privacybeleid',
-      terms: 'Algemene Voorwaarden',
-      connect: 'Verbinden',
-      copyright: '© 2026 EinData. Alle rechten voorbehouden.',
+      description: 'Freelance data-analyse, Azure data engineering en Power BI-dashboards vanuit Eindhoven.',
+      privacy: 'Privacy',
+      rights: 'Alle rechten voorbehouden.',
+    },
+    privacy: {
+      title: 'Privacyverklaring',
+      updated: 'Laatst bijgewerkt: september 2026',
+      sections: [
+        {
+          heading: 'Wie wij zijn',
+          body: 'EinData is een eenmanszaak van Shehab Al-Masri, gevestigd in Eindhoven, ingeschreven bij de Kamer van Koophandel onder KVK-nummer 42115043. Contact: info@eindata.nl.',
+        },
+        {
+          heading: 'Welke gegevens wij verzamelen',
+          body: 'Als u het contactformulier gebruikt of ons mailt, ontvangen wij uw naam, e-mailadres, bedrijfsnaam (indien ingevuld) en uw bericht. Deze website gebruikt geen tracking- of advertentiecookies.',
+        },
+        {
+          heading: 'Waarvoor wij ze gebruiken',
+          body: 'Alleen om uw vraag te beantwoorden en, als we gaan samenwerken, om een voorstel te maken en het werk uit te voeren. Wij verkopen of delen uw gegevens niet voor marketing.',
+        },
+        {
+          heading: 'Hoe lang wij ze bewaren',
+          body: 'Berichten die niet tot een samenwerking leiden, worden binnen 12 maanden verwijderd. Klantadministratie bewaren wij 7 jaar, zoals de Nederlandse belastingwet vereist.',
+        },
+        {
+          heading: 'Uw rechten',
+          body: 'U kunt altijd vragen om uw persoonsgegevens in te zien, te corrigeren of te verwijderen door te mailen naar info@eindata.nl. U kunt ook een klacht indienen bij de Autoriteit Persoonsgegevens.',
+        },
+      ],
+      back: 'Terug naar home',
     },
   },
 };

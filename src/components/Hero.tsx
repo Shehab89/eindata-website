@@ -46,7 +46,7 @@ export default function Hero() {
 
   return (
     <section
-      id="home"
+      id="top"
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Background */}
@@ -90,7 +90,7 @@ export default function Hero() {
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-sm font-medium text-white/90">
-              Cloud & Data Consultancy — The Netherlands
+              {t.hero.badge}
             </span>
           </motion.div>
 
@@ -141,23 +141,23 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 1.0 }}
-            className="mt-16 flex flex-wrap items-center gap-8 text-white/50 text-sm"
+            className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/60 text-sm"
           >
             <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4" />
+              <Cloud className="w-4 h-4" />
               <span>Microsoft Azure</span>
             </div>
             <div className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4" />
-              <span>Power BI</span>
+              <span>Power BI · Tableau</span>
             </div>
             <div className="flex items-center gap-2">
               <Database className="w-4 h-4" />
-              <span>Data Engineering</span>
+              <span>Python · SQL</span>
             </div>
             <div className="flex items-center gap-2">
               <Brain className="w-4 h-4" />
-              <span>AI & ML</span>
+              <span>NLP · Machine learning</span>
             </div>
           </motion.div>
         </div>
