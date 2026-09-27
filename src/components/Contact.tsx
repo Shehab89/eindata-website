@@ -17,7 +17,10 @@ const labelClass =
 const cardClass =
   'bg-[var(--color-surface-card)] dark:bg-[var(--color-dark-surface-card)] rounded-2xl p-6 border border-[var(--color-border)] dark:border-[var(--color-dark-border)]';
 
-const emptyForm = { name: '', email: '', company: '', message: '', website: '' };
+// Public Web3Forms access key (safe to expose; it only allows sending to your own inbox).
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+
+const emptyForm ={ name: '', email: '', company: '', message: '', website: '' };
 
 export default function Contact() {
   const { t, locale } = useLanguage();
@@ -31,14 +34,30 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot filled in: silently pretend success for bots.
+    if (formData.website) {
+      setStatus('sent');
+      return;
+    }
     setStatus('sending');
     try {
-      const res = await fetch('/contact.php', {
+      if (!WEB3FORMS_KEY) throw new Error('Contact form key not configured');
+      // Web3Forms (free) emails the message to the address linked to the access key.
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New message via eindata.nl from ${formData.name}`,
+          from_name: 'EinData website',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || '-',
+          message: formData.message,
+        }),
       });
-      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || String(res.status));
       setStatus('sent');
       setFormData(emptyForm);
     } catch {

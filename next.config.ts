@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 // Static export: `npm run build` writes plain HTML/CSS/JS to `out/`,
-// which is uploaded to GoDaddy cPanel hosting (public_html).
+// which Cloudflare Pages hosts for free (see docs/GO-LIVE.md).
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,

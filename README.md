@@ -7,8 +7,8 @@ Built with Next.js 16 (App Router), Tailwind CSS 4 and framer-motion.
 - `/`: English, `/nl/`: Dutch (separate URLs so Google indexes both languages)
 - All text lives in `src/lib/i18n.ts`. Edit it there, for both languages.
 - SEO: metadata and JSON-LD in `src/lib/seo.ts`, plus `sitemap.xml`, `robots.txt` and `public/llms.txt` (a summary for AI assistants)
-- Contact form: `public/contact.php` emails messages to info@eindata.nl (PHP `mail()` on the hosting)
-- Hosting: static export (`out/`) on GoDaddy cPanel, deployed by `.github/workflows/deploy.yml`
+- Contact form: sent by Web3Forms (free), key in `NEXT_PUBLIC_WEB3FORMS_KEY`
+- Hosting: static export (`out/`) on Cloudflare Pages (free), email forwarding via Cloudflare Email Routing (free)
 
 ```bash
 npm install
